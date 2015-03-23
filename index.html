@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <link rel="stylesheet" type = "text/css" href = "style.css"/>
+                <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+        <link rel = "icon" type = "icon" href = "clock.png">
+        <meta name="viewport" content="width=device-width"/>
+        <meta charset="UTF-8">
+       <title> 10 Past Blue </title>        
+    </head>
+    
+    <body>        
+        <div class = "clock">
+            <div class = "header">
+                <p id = "name">Hex Color Clock</p>
+            </div>
+            <div class = "number">
+                <p class = "time"></p>
+                <p class = "color"></p>
+                
+            </div>
+            <div class = "footer">
+                <a href = "https://www.linkedin.com/pub/mehtab-chithiwala/84/759/253">
+                    <img id = "l" src = "linkedin-w.png">
+                </a>
+                &#169 Mehtab Chithiwala
+                <a href = "https://www.facebook.com/mehtab.chithiwala">
+                    <img id = "f" src = "fb-w.png">
+                </a>
+                <div class = "temp">
+                      <audio id = "audio" src = "clock-tick.wav" type = "audio/mpeg" loop autoplay></audio>
+                <img id = "play" src = "speaker.png">
+                </div>
+            </div>
+        </div>
+    </body> 
+
+     <script src = "jquery.js"></script>
+    <script>
+    function getColor() {
+    
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+
+    if (hours < 10)
+    {
+        hours = "0" + hours
+    };
+
+    if (minutes < 10)
+    {
+        minutes = "0" + minutes
+    };
+
+    if (seconds < 10)
+    {
+        seconds = "0" + seconds
+    };
+
+    var time = "#" + hours + minutes + seconds;
+    
+    var aOrP = "am";
+    
+    if (hours === 12)
+    {
+        aOrP = "pm";    
+    }
+    if (hours > 12)
+    {   
+        aOrP = "pm";
+        hours = hours - 12;
+        if (hours < 10)
+        {
+            hours = "0" + hours;
+        }
+    }
+    $(function() {
+        $(".clock").css("background-color", time);
+        $(".time").text(hours + " : " + minutes + " : " + seconds + "  " + aOrP);
+        $(".color").text(time);
+        
+       // $("#name").click(function() {
+         //   $(this).hide();
+        //});
+    });
+        
+    setTimeout(getColor, 1000);
+    
+}
+
+        var sound = document.getElementById("audio");
+        var control = document.getElementById("play");
+        
+        control.onclick = function() {
+            if (sound.paused === true)
+            {
+                control.src = "speaker.png";
+                sound.play();
+            }
+            else 
+            {
+                control.src = "mute.png";
+                sound.pause();
+            }
+        };
+
+getColor();
+    </script>
+</html>
